@@ -9,21 +9,21 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Data jo previous form se aayega
+  // Form se aaya hua data yahan store rahega,
+  // lekin Login page par display nahi hoga.
   const submittedData = location.state?.submittedData || {};
   const formType = location.state?.formType || "Form Submission";
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       alert("Please enter email and password.");
       return;
     }
 
-    // Academic project ke liye basic login flow
-    // Baad mein isko real database authentication se connect kar sakte hain.
     navigate("/submission-success", {
+      replace: true,
       state: {
         submittedData: submittedData,
         formType: formType,
@@ -34,12 +34,9 @@ function Login() {
 
   return (
     <div className="login-page">
-
       <div className="login-card">
 
-        <div className="login-logo">
-          🩺
-        </div>
+        <div className="login-logo">🩺</div>
 
         <p className="login-brand">DOCCONNECT</p>
 
@@ -73,18 +70,20 @@ function Login() {
             />
           </div>
 
-          <button type="submit" className="login-button">
+          <button
+            type="submit"
+            className="login-button"
+          >
             Login & Continue →
           </button>
 
         </form>
 
         <p className="login-note">
-          Your submitted information will be displayed on the confirmation page.
+          Login to view your submission confirmation.
         </p>
 
       </div>
-
     </div>
   );
 }

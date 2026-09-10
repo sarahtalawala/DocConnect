@@ -75,12 +75,12 @@ function Home() {
 
         {/* LOGIN */}
         <button
-          type="button"
-          className="login-btn"
-          onClick={() => navigate("/patient-registration")}
+        type="button"
+        className="login-btn"
+        onClick={() => navigate("/login")}
         >
           Login
-        </button>
+          </button>
 
       </header>
 
@@ -1442,10 +1442,15 @@ function AppRouter() {
           path="/contact"
           element={<ContactForm />}
         />
-        <Route path="/login" element={<Login />} />
+
         <Route
-        path="/submission-success"
-        element={<SubmissionSuccess />}
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/submission-success"
+          element={<SubmissionSuccess />}
         />
 
       </Routes>
