@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./PatientRegistration.css";
 
 function PatientRegistration() {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -27,10 +26,10 @@ function PatientRegistration() {
     e.preventDefault();
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL;
 
-      // Send patient data to Flask backend
       const response = await fetch(
-        "http://127.0.0.1:5000/api/patients",
+        `${API_URL}/api/patients`,
         {
           method: "POST",
           headers: {
@@ -43,41 +42,31 @@ function PatientRegistration() {
       const result = await response.json();
 
       if (result.success) {
-
-        // Go to Login page and send patient details
         navigate("/login", {
           state: {
             submittedData: formData,
             formType: "Patient Registration",
           },
         });
-
       } else {
-
         alert(
           "❌ Registration failed: " + result.message
         );
-
       }
-
     } catch (error) {
-
       console.error(error);
 
       alert(
         "❌ Unable to connect to the server. Please make sure Flask is running."
       );
-
     }
   };
 
   return (
     <div className="registration-page">
-
       <div className="registration-container">
 
         <div className="form-heading">
-
           <p>DOCCONNECT</p>
 
           <h1>Patient Registration</h1>
@@ -85,7 +74,6 @@ function PatientRegistration() {
           <span>
             Create your patient profile to access healthcare services.
           </span>
-
         </div>
 
         <form
@@ -93,12 +81,9 @@ function PatientRegistration() {
           className="registration-form"
         >
 
-          {/* Full Name + Age */}
-
           <div className="form-row">
 
             <div className="form-group">
-
               <label>Full Name</label>
 
               <input
@@ -109,11 +94,9 @@ function PatientRegistration() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <div className="form-group">
-
               <label>Age</label>
 
               <input
@@ -124,16 +107,11 @@ function PatientRegistration() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
           </div>
 
-
-          {/* Gender */}
-
           <div className="form-group">
-
             <label>Gender</label>
 
             <select
@@ -142,32 +120,14 @@ function PatientRegistration() {
               onChange={handleChange}
               required
             >
-
-              <option value="">
-                Select gender
-              </option>
-
-              <option value="Male">
-                Male
-              </option>
-
-              <option value="Female">
-                Female
-              </option>
-
-              <option value="Other">
-                Other
-              </option>
-
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
-
           </div>
 
-
-          {/* Phone */}
-
           <div className="form-group">
-
             <label>Phone Number</label>
 
             <input
@@ -178,14 +138,9 @@ function PatientRegistration() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
-          {/* Email */}
-
           <div className="form-group">
-
             <label>Email Address</label>
 
             <input
@@ -196,14 +151,9 @@ function PatientRegistration() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
-          {/* City */}
-
           <div className="form-group">
-
             <label>City / Location</label>
 
             <input
@@ -214,17 +164,10 @@ function PatientRegistration() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
-          {/* Medical History */}
-
           <div className="form-group">
-
-            <label>
-              Medical History (Optional)
-            </label>
+            <label>Medical History (Optional)</label>
 
             <textarea
               name="medicalHistory"
@@ -233,11 +176,7 @@ function PatientRegistration() {
               value={formData.medicalHistory}
               onChange={handleChange}
             ></textarea>
-
           </div>
-
-
-          {/* Submit */}
 
           <button
             type="submit"
@@ -247,9 +186,7 @@ function PatientRegistration() {
           </button>
 
         </form>
-
       </div>
-
     </div>
   );
 }

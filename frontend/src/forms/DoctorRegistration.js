@@ -30,7 +30,7 @@ function DoctorRegistration() {
     try {
 
       const response = await fetch(
-        "http://127.0.0.1:5000/api/doctors",
+        `${process.env.REACT_APP_API_URL}/api/doctors`,
         {
           method: "POST",
           headers: {
@@ -39,7 +39,7 @@ function DoctorRegistration() {
           body: JSON.stringify(formData),
         }
       );
-
+      
       const result = await response.json();
 
       if (result.success) {
