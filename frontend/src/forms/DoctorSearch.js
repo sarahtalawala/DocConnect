@@ -123,6 +123,11 @@ function DoctorSearch() {
                 Dermatologist
               </option>
 
+              {/* NEW OPTION */}
+              <option value="Psychiatrist">
+                Psychiatrist
+              </option>
+
               <option value="Physiotherapist">
                 Physiotherapist
               </option>
