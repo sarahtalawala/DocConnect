@@ -1,0 +1,171 @@
+.success-page {
+  min-height: 100vh;
+  background: #f5f9ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.success-card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 45px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.success-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.success-brand {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.success-card h1 {
+  color: #102a43;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.success-message {
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.success-status {
+  display: inline-block;
+  padding: 9px 16px;
+  border-radius: 20px;
+  background: #ecfdf5;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.receipt-box {
+  text-align: left;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.receipt-box h2 {
+  color: #102a43;
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.receipt-row:last-child {
+  border-bottom: none;
+}
+
+.receipt-row span {
+  color: #64748b;
+}
+
+.receipt-row strong {
+  color: #1e293b;
+  text-align: right;
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.success-text {
+  color: #16a34a !important;
+}
+
+.screenshot-note {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.pdf-button,
+.home-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pdf-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.pdf-button:hover {
+  background: #1d4ed8;
+}
+
+.home-button {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #334155;
+}
+
+.home-button:hover {
+  background: #f8fafc;
+}
+
+@media (max-width: 600px) {
+
+  .success-card {
+    padding: 28px 20px;
+  }
+
+  .success-card h1 {
+    font-size: 25px;
+  }
+
+  .receipt-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .receipt-row strong {
+    text-align: left;
+    max-width: 100%;
+  }
+}

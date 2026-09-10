@@ -1,0 +1,180 @@
+.map-page {
+  min-height: 100vh;
+  padding: 80px 7%;
+  background: #f5f9ff;
+}
+
+
+.map-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+
+.map-header p {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+
+.map-header h1 {
+  font-size: 42px;
+  color: #102a43;
+  margin-bottom: 12px;
+}
+
+
+.map-header span {
+  color: #64748b;
+  font-size: 16px;
+}
+
+
+.map-container-wrapper {
+  width: 100%;
+  height: 550px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+  border: 1px solid #e2e8f0;
+}
+
+
+.doctor-map {
+  width: 100%;
+  height: 100%;
+}
+
+
+.doctor-popup {
+  min-width: 200px;
+}
+
+
+.doctor-popup h3 {
+  color: #102a43;
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+
+.doctor-popup p {
+  margin: 7px 0;
+  color: #475569;
+  font-size: 13px;
+}
+
+
+.popup-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.popup-button:hover {
+  background: #1d4ed8;
+}
+
+
+.map-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+
+.map-info-card {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+
+.map-info-card span {
+  font-size: 30px;
+}
+
+
+.map-info-card h3 {
+  margin: 0 0 8px;
+  color: #102a43;
+}
+
+
+.map-info-card p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+
+@media (max-width: 900px) {
+
+  .map-info {
+    grid-template-columns: 1fr;
+  }
+
+  .map-header h1 {
+    font-size: 32px;
+  }
+
+  .map-container-wrapper {
+    height: 450px;
+  }
+
+}
+
+.search-map-section {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.search-map-section h2 {
+  margin-bottom: 8px;
+}
+
+.search-map-section > p {
+  margin-bottom: 20px;
+  color: #64748b;
+}
+
+.search-map-section .map-page {
+  width: 100%;
+  padding: 40px 0;
+  background: transparent;
+}
+
+.search-map-section .map-header {
+  margin-bottom: 25px;
+}
+
+.search-map-section .map-container-wrapper {
+  width: 100%;
+  height: 600px;
+}
+
+.doctor-form {
+  width: 100%;
+}
+
+.doctor-results-grid {
+  width: 100%;
+}

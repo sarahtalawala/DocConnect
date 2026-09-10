@@ -1,0 +1,37 @@
+.doctor-registration-page {
+  min-height: 100vh;
+  background: #f4f8ff;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.doctor-registration-container {
+  width: 100%;
+  max-width: 650px;
+  background: white;
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(15, 47, 107, 0.12);
+}
+
+.doctor-registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.doctor-submit-btn {
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #173f8f;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.doctor-submit-btn:hover {
+  background: #2563eb;
+}
