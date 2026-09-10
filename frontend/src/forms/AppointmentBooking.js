@@ -24,54 +24,46 @@ function AppointmentBooking() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
+  try {
+    const API_URL =
+      "https://docconnect-backend-z8tz.onrender.com";
 
-      // Send appointment data to Flask backend
-      const response = await fetch(
-        "http://127.0.0.1:5000/api/appointments",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const result = await response.json();
-
-      // If appointment is successfully saved
-      if (result.success) {
-
-        // Go to Login page and send appointment details
-        navigate("/login", {
-          state: {
-            submittedData: formData,
-            formType: "Appointment Booking",
-          },
-        });
-
-      } else {
-
-        alert(
-          "❌ Booking failed: " + result.message
-        );
-
+    const response = await fetch(
+      `${API_URL}/api/appointments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       }
+    );
 
-    } catch (error) {
+    const result = await response.json();
 
-      console.error(error);
-
+    if (result.success) {
+      navigate("/login", {
+        state: {
+          submittedData: formData,
+          formType: "Appointment Booking",
+        },
+      });
+    } else {
       alert(
-        "❌ Unable to connect to server. Please make sure Flask is running."
+        "❌ Booking failed: " + result.message
       );
-
     }
-  };
 
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      "❌ Unable to connect to server. Please try again."
+    );
+  }
+};
   return (
     <div className="appointment-page">
 
