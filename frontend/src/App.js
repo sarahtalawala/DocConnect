@@ -16,8 +16,7 @@ import AppointmentBooking from "./forms/AppointmentBooking";
 import ContactForm from "./forms/ContactForm";
 import Login from "./Login";
 import SubmissionSuccess from "./SubmissionSuccess";
-import ServiceDetails from "./ServiceDetails";
-import MapView from "./MapView";
+
 
 /* =========================================================
    HOME PAGE
