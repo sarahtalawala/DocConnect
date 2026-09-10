@@ -1,17 +1,21 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import mysql.connector
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 
+# DATABASE CONNECTION
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="docconnect"
+        host=os.getenv("DB_HOST"),
+        port=int(os.getenv("DB_PORT", 25430)),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        ssl_disabled=False
     )
 
 
@@ -98,9 +102,9 @@ def add_doctor():
 @app.route("/api/doctors", methods=["GET"])
 def search_doctors():
 
-    specialization = request.args.get("specialization")
-    location = request.args.get("location")
-    doctor_name = request.args.get("doctorName")
+    specialization = request.args.get("specialization", "")
+    location = request.args.get("location", "")
+    doctor_name = request.args.get("doctorName", "")
 
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
