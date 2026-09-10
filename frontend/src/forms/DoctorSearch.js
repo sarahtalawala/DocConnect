@@ -3,7 +3,6 @@ import "./DoctorSearch.css";
 import MapView from "../MapView";
 
 function DoctorSearch() {
-
   const [formData, setFormData] = useState({
     location: "",
     specialization: "",
@@ -28,46 +27,43 @@ function DoctorSearch() {
     setSearched(false);
 
     try {
-
       const params = new URLSearchParams({
         location: formData.location,
         specialization: formData.specialization,
         doctorName: formData.doctorName,
       });
 
+      // Live Render backend
+      const API_URL = process.env.REACT_APP_API_URL;
+
       const response = await fetch(
-        `http://127.0.0.1:5000/api/doctors?${params.toString()}`
+        `${API_URL}/api/doctors?${params.toString()}`
       );
+
+      if (!response.ok) {
+        throw new Error("Server response failed");
+      }
 
       const result = await response.json();
 
       setDoctors(result);
       setSearched(true);
-
     } catch (error) {
-
       console.error(error);
 
       alert(
-        "❌ Unable to connect to server. Please make sure Flask is running."
+        "❌ Unable to connect to server. Please make sure the backend is running."
       );
-
     } finally {
-
       setLoading(false);
-
     }
   };
 
   return (
     <div className="doctor-search-page">
-
       <div className="doctor-search-container">
 
-        {/* ================= HEADING ================= */}
-
         <div className="form-heading">
-
           <p>DOCCONNECT</p>
 
           <h1>Find a Doctor</h1>
@@ -76,21 +72,14 @@ function DoctorSearch() {
             Search for the right doctor based on your
             location and specialization.
           </span>
-
         </div>
-
-
-        {/* ================= SEARCH FORM ================= */}
 
         <form
           onSubmit={handleSubmit}
           className="doctor-form"
         >
 
-          {/* LOCATION */}
-
           <div className="form-group">
-
             <label>Location</label>
 
             <input
@@ -100,14 +89,9 @@ function DoctorSearch() {
               value={formData.location}
               onChange={handleChange}
             />
-
           </div>
 
-
-          {/* SPECIALIZATION */}
-
           <div className="form-group">
-
             <label>Specialization</label>
 
             <select
@@ -115,7 +99,6 @@ function DoctorSearch() {
               value={formData.specialization}
               onChange={handleChange}
             >
-
               <option value="">
                 Select specialization
               </option>
@@ -143,16 +126,10 @@ function DoctorSearch() {
               <option value="Physiotherapist">
                 Physiotherapist
               </option>
-
             </select>
-
           </div>
 
-
-          {/* DOCTOR NAME */}
-
           <div className="form-group">
-
             <label>Doctor Name (Optional)</label>
 
             <input
@@ -162,50 +139,32 @@ function DoctorSearch() {
               value={formData.doctorName}
               onChange={handleChange}
             />
-
           </div>
-
-
-          {/* SEARCH BUTTON */}
 
           <button
             type="submit"
             className="search-doctor-btn"
             disabled={loading}
           >
-
             {loading
               ? "Searching..."
               : "🔍 Search Doctor"}
-
           </button>
-
         </form>
 
-
-        {/* ================= RESULTS ================= */}
-
         {searched && (
-
           <div className="search-results">
 
-            <h2>
-              Search Results
-            </h2>
-
+            <h2>Search Results</h2>
 
             {doctors.length === 0 ? (
 
               <div className="no-results">
-
-                <h3>
-                  No doctors found
-                </h3>
+                <h3>No doctors found</h3>
 
                 <p>
                   Try changing the location or specialization.
                 </p>
-
               </div>
 
             ) : (
@@ -223,9 +182,7 @@ function DoctorSearch() {
                       👨‍⚕️
                     </div>
 
-                    <h3>
-                      {doctor.name}
-                    </h3>
+                    <h3>{doctor.name}</h3>
 
                     <p className="doctor-specialization">
                       {doctor.specialization}
@@ -244,7 +201,9 @@ function DoctorSearch() {
                     </p>
 
                     <p>
-                      💰 ₹{doctor.consultation_fee || "Not available"}
+                      💰 ₹
+                      {doctor.consultation_fee ||
+                        "Not available"}
                     </p>
 
                     <p>
@@ -267,15 +226,10 @@ function DoctorSearch() {
                 ))}
 
               </div>
-
             )}
 
           </div>
-
         )}
-
-
-        {/* ================= MAP ================= */}
 
         {searched && doctors.length > 0 && (
 
@@ -292,11 +246,9 @@ function DoctorSearch() {
             <MapView doctors={doctors} />
 
           </div>
-
         )}
 
       </div>
-
     </div>
   );
 }
