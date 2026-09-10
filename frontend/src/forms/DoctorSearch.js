@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./DoctorSearch.css";
 import MapView from "../MapView";
@@ -14,6 +15,7 @@ function DoctorSearch() {
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState("");
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,6 +23,7 @@ function DoctorSearch() {
     });
   };
 
+  // Search doctors
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,14 +33,14 @@ function DoctorSearch() {
     setDoctors([]);
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL;
+      // LIVE RENDER BACKEND
+      const API_URL =
+        "https://docconnect-backend-z8tz.onrender.com";
 
-      if (!API_URL) {
-        throw new Error("API URL is not configured");
-      }
-
-      // Get all doctors from the live backend
-      const response = await fetch(`${API_URL}/api/doctors`);
+      // Get all doctors
+      const response = await fetch(
+        `${API_URL}/api/doctors`
+      );
 
       if (!response.ok) {
         throw new Error("Server response failed");
@@ -46,33 +49,43 @@ function DoctorSearch() {
       const result = await response.json();
 
       if (!Array.isArray(result)) {
-        throw new Error("Invalid doctor data received");
+        throw new Error("Invalid doctor data");
       }
 
-      // Clean user inputs
-      const location = formData.location.trim().toLowerCase();
-      const specialization =
-        formData.specialization.trim().toLowerCase();
-      const doctorName =
-        formData.doctorName.trim().toLowerCase();
+      // User input
+      const location = formData.location
+        .trim()
+        .toLowerCase();
 
-      // Frontend filtering
+      const specialization = formData.specialization
+        .trim()
+        .toLowerCase();
+
+      const doctorName = formData.doctorName
+        .trim()
+        .toLowerCase();
+
+      // Filter doctors
       const filteredDoctors = result.filter((doctor) => {
-        const doctorLocation =
-          String(doctor.location || "").toLowerCase();
+        const doctorLocation = String(
+          doctor.location || ""
+        ).toLowerCase();
 
-        const doctorSpecialization =
-          String(doctor.specialization || "").toLowerCase();
+        const doctorSpecialization = String(
+          doctor.specialization || ""
+        ).toLowerCase();
 
-        const name =
-          String(doctor.name || "").toLowerCase();
+        const name = String(
+          doctor.name || ""
+        ).toLowerCase();
 
         const locationMatch =
-          !location || doctorLocation.includes(location);
+          !location ||
+          doctorLocation.includes(location);
 
         const specializationMatch =
           !specialization ||
-          doctorSpecialization.includes(specialization);
+          doctorSpecialization === specialization;
 
         const nameMatch =
           !doctorName ||
@@ -87,9 +100,11 @@ function DoctorSearch() {
 
       setDoctors(filteredDoctors);
       setSearched(true);
-
     } catch (error) {
-      console.error("Doctor Search Error:", error);
+      console.error(
+        "Doctor Search Error:",
+        error
+      );
 
       setError(
         "Unable to connect to the server. Please try again."
@@ -106,27 +121,36 @@ function DoctorSearch() {
 
       <div className="doctor-search-container">
 
-        {/* Heading */}
+        {/* PAGE HEADING */}
+
         <div className="form-heading">
+
           <p>DOCCONNECT</p>
 
           <h1>Find a Doctor</h1>
 
           <span>
-            Search for the right doctor based on your
-            location and specialization.
+            Search for the right doctor based on
+            your location and specialization.
           </span>
+
         </div>
 
-        {/* Search Form */}
+
+        {/* SEARCH FORM */}
+
         <form
           onSubmit={handleSubmit}
           className="doctor-form"
         >
 
-          {/* Location */}
+          {/* LOCATION */}
+
           <div className="form-group">
-            <label>Location</label>
+
+            <label>
+              Location
+            </label>
 
             <input
               type="text"
@@ -135,23 +159,34 @@ function DoctorSearch() {
               value={formData.location}
               onChange={handleChange}
             />
+
           </div>
 
-          {/* Specialization */}
+
+          {/* SPECIALIZATION */}
+
           <div className="form-group">
-            <label>Specialization</label>
+
+            <label>
+              Specialization
+            </label>
 
             <select
               name="specialization"
               value={formData.specialization}
               onChange={handleChange}
             >
+
               <option value="">
                 Select specialization
               </option>
 
               <option value="General Physician">
                 General Physician
+              </option>
+
+              <option value="Physician">
+                Physician
               </option>
 
               <option value="Cardiologist">
@@ -162,12 +197,16 @@ function DoctorSearch() {
                 Dentist
               </option>
 
-              <option value="Orthopedic">
-                Orthopedic
+              <option value="Orthopedist">
+                Orthopedist
               </option>
 
               <option value="Dermatologist">
                 Dermatologist
+              </option>
+
+              <option value="Ophthalmologist">
+                Ophthalmologist
               </option>
 
               <option value="Psychiatrist">
@@ -177,12 +216,19 @@ function DoctorSearch() {
               <option value="Physiotherapist">
                 Physiotherapist
               </option>
+
             </select>
+
           </div>
 
-          {/* Doctor Name */}
+
+          {/* DOCTOR NAME */}
+
           <div className="form-group">
-            <label>Doctor Name (Optional)</label>
+
+            <label>
+              Doctor Name (Optional)
+            </label>
 
             <input
               type="text"
@@ -191,66 +237,100 @@ function DoctorSearch() {
               value={formData.doctorName}
               onChange={handleChange}
             />
+
           </div>
 
-          {/* Search Button */}
+
+          {/* SEARCH BUTTON */}
+
           <button
             type="submit"
             className="search-doctor-btn"
             disabled={loading}
           >
+
             {loading
               ? "Searching..."
               : "🔍 Search Doctor"}
+
           </button>
 
         </form>
 
-        {/* Results */}
+
+        {/* SEARCH RESULTS */}
+
         {searched && (
+
           <div className="search-results">
 
-            <h2>Search Results</h2>
+            <h2>
+              Search Results
+            </h2>
 
-            {/* Server Error */}
+
+            {/* ERROR */}
+
             {error ? (
 
               <div className="no-results error-result">
-                <h3>⚠️ Something went wrong</h3>
 
-                <p>{error}</p>
+                <div className="no-result-icon">
+                  ⚠️
+                </div>
+
+                <h3>
+                  Something went wrong
+                </h3>
+
+                <p>
+                  {error}
+                </p>
 
                 <button
                   className="retry-btn"
-                  onClick={() => setSearched(false)}
+                  onClick={() => {
+                    setSearched(false);
+                    setError("");
+                  }}
                 >
                   Try Again
                 </button>
+
               </div>
+
 
             ) : doctors.length === 0 ? (
 
-              /* No Doctors */
+              /* NO DOCTORS */
+
               <div className="no-results">
+
                 <div className="no-result-icon">
                   🔍
                 </div>
 
-                <h3>No doctors found</h3>
+                <h3>
+                  No doctors found
+                </h3>
 
                 <p>
-                  We couldn't find a doctor matching your
-                  search.
+                  We couldn't find a doctor
+                  matching your search.
                 </p>
 
                 <span>
-                  Try another location or specialization.
+                  Try another location or
+                  specialization.
                 </span>
+
               </div>
+
 
             ) : (
 
-              /* Doctor Cards */
+              /* DOCTOR RESULTS */
+
               <div className="doctor-results-grid">
 
                 {doctors.map((doctor) => (
@@ -324,9 +404,12 @@ function DoctorSearch() {
             )}
 
           </div>
+
         )}
 
-        {/* Map */}
+
+        {/* MAP */}
+
         {searched &&
           !error &&
           doctors.length > 0 && (
@@ -338,17 +421,23 @@ function DoctorSearch() {
               </h2>
 
               <p>
-                Click on a marker to view doctor details.
+                Click on a marker to view
+                doctor details.
               </p>
 
-              <MapView doctors={doctors} />
+              <MapView
+                doctors={doctors}
+              />
 
             </div>
+
           )}
 
       </div>
+
     </div>
   );
 }
 
 export default DoctorSearch;
+
