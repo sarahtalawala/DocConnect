@@ -76,11 +76,11 @@ function Home() {
         {/* LOGIN */}
         <button
         type="button"
-        className="login-btn"
-        onClick={() => navigate("/login")}
-        >
-          Login
-          </button>
+      className="login-btn"
+      onClick={() => navigate("/login")}
+      >
+        Login
+        </button>
 
       </header>
 
